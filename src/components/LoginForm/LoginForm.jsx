@@ -11,8 +11,8 @@ function LoginForm(props) {
         const { username, password } = e.target;
 
         AuthApiServices.postLogin({
-            username: username.value,
-            password: password.value,
+            user_name: username.value,
+            user_password: password.value,
         })
             .then((res) => {
                 if (!res.status === 200) {
@@ -35,7 +35,7 @@ function LoginForm(props) {
                 <label htmlFor='username'>Username: </label>
                 <input required type="text" id='username' />
                 <label htmlFor="password">Password: </label>
-                <input required type="text" type='password' />
+                <input required type="text" id='password' />
                 <button type="submit"> Login </button>
             </form>
         </>

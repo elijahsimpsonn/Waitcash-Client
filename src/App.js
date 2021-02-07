@@ -60,7 +60,7 @@ const App = () => {
             <PrivateRoute 
             exact
             path="/dashboard"
-            component={(props) => <Dashboard {...props} username={username}/>}    
+            component={(props) => <Dashboard {...props} username={username} userId={userId} setUserId={setUserId}/>}    
             />
           </Switch>
         </Router>

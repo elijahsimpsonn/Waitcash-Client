@@ -1,0 +1,35 @@
+.landing-page {
+    text-align: center;
+}
+
+.text-section {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.demo-button {
+    margin-top: 75px;
+}
+
+.button-section {
+    margin-top: 30px;
+}
+
+.space {
+    margin-right: 30px;
+}
+
+footer {
+    position: fixed;     
+    text-align: center;    
+    bottom: 0px; 
+    width: 100%;
+}
+
+h3 {
+    margin-top: 75px
+}
+
+a {
+    text-decoration: none;
+}

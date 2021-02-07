@@ -2,6 +2,7 @@ import React from 'react';
 import TokenService from '../../services/tokenService';
 import authApiService from '../../services/authApiService';
 import jwt from 'jsonwebtoken'
+import './LandingPage.css'
 
 function LandingPage(props) {
 
@@ -32,13 +33,33 @@ function LandingPage(props) {
     }
 
     return (
-        <div>
-            <h3>Landing Page</h3>
+        <section className="landing-page">
+            <h3>Welcome to WaitCash!</h3>
 
-            <button onClick={handleDemoClick}>
+            <div className="text-section">
+            <p>WaitCash is a Full-Stack Application.</p>
+            <p>Want to learn more about it's tech stack?</p>
+            </div>
+
+            <div className="text-section">
+            <p>This application allows you to keep track of wages earned on wait shifts.</p> 
+            </div>
+
+            <div className="text-section">
+            <p>Just want to see it in action? Click the Launch Demo button. Otherwise, feel free to sign up or login.</p>
+            </div>
+
+            <button className="demo-button" onClick={handleDemoClick}>
                 Launch Demo
             </button>
-        </div>
+
+            <div className="button-section">
+                <button className="space">Login</button>
+                <button>Sign Up</button>
+            </div>
+
+            <footer>Created by <a href="http://www.elijahsimpson.com">Elijah Simpson</a> || 2021</footer>
+        </section>
     )
 }
 

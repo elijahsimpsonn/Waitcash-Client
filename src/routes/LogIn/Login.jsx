@@ -12,7 +12,7 @@ function Login(props) {
         const destination = (location.state || {}).from || '/home';
 
         props.setUserId(jwt.decode(TokenService.getAuthToken()).userId);
-        props.setUsername(jwt.decode(TokenService.getAuthToken()).username)
+        props.setUsername(jwt.decode(TokenService.getAuthToken()).user_name)
         history.push(destination);
     }
 
