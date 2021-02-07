@@ -1,0 +1,22 @@
+
+.date {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.button-section {
+    text-align: center;
+}
+
+.earnings {
+    margin-left: 16px;
+}
+
+button {
+    padding: 8px 35px;
+    margin-bottom: 8px;
+}
+
+hr {
+    width: 90%;
+}

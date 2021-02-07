@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import TokenService from '../../services/tokenService'
 import appApiService from '../../services/appApiService'
+import './Dashboard.css'
 
 export default function Dashboard(props) {
 
@@ -13,7 +14,13 @@ export default function Dashboard(props) {
         })
     }, [])
 
-    const sumOfTotalEarnings = tips.reduce((prev, cur) => prev + cur.tip_total, 0) 
+    const sumOfTotalEarnings = (tips) => {
+        let sum = 0
+        for(let i = 0; i < tips.length; i++) {
+            let curr = parseFloat(tips[i].tip_total);
+            sum = sum + curr;
+        } return sum;
+    }
 
     const sumOfYearlyEarnings = null //Get tip_totals fron tips state matching the current year from currentDate, then sum and return?
 
@@ -37,22 +44,27 @@ export default function Dashboard(props) {
 
     // CONSOLE LOG TEST (DELETE BEFORE PRODUCTION BUILD) //
     console.log(tips)
-    console.log(sumOfTotalEarnings) // What is going on here? Printing the totals in a line like:  $03.20004.89001.5600
+    console.log(currentDate)
     // ------------------------------------------------ //
 
     return (
         <>
-        <h3>{currentDate.getMonth()}/{currentDate.getDate()}/{currentDate.getFullYear()}</h3> {/* This is not showing the current date? */}
-        <h3>{props.username}</h3> {/* username comes back as undefined for some reason? */}
-        <button>Start Shift</button>
+        <h3 className="date">{currentDate.toLocaleDateString()}</h3>
+        {/* <h3>{props.username}</h3> username comes back as undefined for some reason? */}
+
+        <div className="button-section">
+        <button className="space">Start Shift</button>
         <button onClick={handleLogout}>Log Out</button>
+        </div>
 
         <hr/>
 
-        <p>Total Earnings (All Time): ${sumOfTotalEarnings}</p>
+        <div className="earnings">
+        <span>Total Earnings (All Time): ${sumOfTotalEarnings(tips)}</span>
         <p>Current Yearly Earnings: </p>
         <p>Current Monthly Earnings: </p>
         <p>Current Weekly Earnings: </p>
+        </div>
 
         <hr/>
 
