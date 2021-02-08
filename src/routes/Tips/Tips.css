@@ -17,7 +17,7 @@
     margin-bottom: 17px;
 }
 
-.earnings {
+.earnings-box {
     border: 1px solid white;
     width: 95%;
     margin-top: 15px;
@@ -25,7 +25,7 @@
     margin-right: auto;
 }
 
-.earnings hr {
+.earnings-box hr {
     width: 60%;
 }
 

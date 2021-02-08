@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.6.3",
     "axios": "^0.21.0",
+    "chart.js": "^2.9.4",
     "dotenv": "^8.2.0",
     "history": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
@@ -14,6 +15,7 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "victory": "^35.4.8",
     "web-vitals": "^1.1.0",
     "week-utils": "^1.0.4"
   },

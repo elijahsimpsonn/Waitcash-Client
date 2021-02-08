@@ -3,6 +3,7 @@ import WeekUtils from 'week-utils'
 import TokenService from '../../services/tokenService'
 import appApiService from '../../services/appApiService'
 import { Link } from 'react-router-dom';
+import { VictoryBar } from 'victory'
 import './Dashboard.css'
 
 export default function Dashboard(props) {
@@ -84,7 +85,7 @@ export default function Dashboard(props) {
         {/* <h3>{props.username}</h3> username comes back as undefined for some reason? */}
 
         <div className="button-section">
-        <Link to='/tips'><button className="space">Start Shift</button></Link>
+        <Link to='/tips'><button className="space">Enter Tips</button></Link>
         <button onClick={handleLogout}>Log Out</button>
         </div>
 
@@ -107,6 +108,8 @@ export default function Dashboard(props) {
             <option value="days">Hightest Earning Days</option>
         </select>
         </div>
+
+        <VictoryBar/>
         </>
         
     )
