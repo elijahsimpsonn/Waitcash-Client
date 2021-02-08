@@ -2,6 +2,7 @@ import React from 'react';
 import TokenService from '../../services/tokenService';
 import authApiService from '../../services/authApiService';
 import jwt from 'jsonwebtoken'
+import { Link } from 'react-router-dom';
 import './LandingPage.css'
 
 function LandingPage(props) {
@@ -54,8 +55,8 @@ function LandingPage(props) {
             </button>
 
             <div className="button-section">
-                <button className="space">Login</button>
-                <button>Sign Up</button>
+                <Link to='/login'><button className="space">Login</button></Link>
+                <Link to='/register'><button>Sign Up</button></Link>
             </div>
 
             <footer>Created by <a href="http://www.elijahsimpson.com">Elijah Simpson</a> || 2021</footer>

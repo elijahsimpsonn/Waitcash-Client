@@ -1,10 +1,10 @@
-import { useState, useReducer } from 'react';
-import AuthApiService from '../../services/authApiService'; 
+import { useState, useReducer } from "react";
+import AuthApiService from "../../services/authApiService";
 
 const initialFormState = {
-  regUsername: '',
-  regPassword: '',
-  confirmPass: '',
+  regUsername: "",
+  regPassword: "",
+  confirmPass: "",
 };
 
 function reducer(state, { field, value }) {
@@ -27,11 +27,11 @@ const RegistrationForm = (props) => {
     const { regUsername, regPassword, confirmPass, email } = state;
 
     if (regPassword.length < 6) {
-      setError('Password must be at least 6 characters');
+      setError("Password must be at least 6 characters");
       return;
     }
     if (regPassword !== confirmPass) {
-      setError('Passwords must match');
+      setError("Passwords must match");
       return;
     }
     const newUser = {
@@ -45,36 +45,39 @@ const RegistrationForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>{error && <p>{error.error}</p>}</div>
-      <label htmlFor="regUsername"> Username: </label>
-      <input
-        id="regUsername"
-        name="regUsername"
-        required
-        type="text"
-        onChange={onChange}
-      ></input>
-      <label htmlFor="regPassword" name="regPassword">
-        Password:
-      </label>
-      <input
-        id="regPassword"
-        name="regPassword"
-        type="password"
-        required
-        onChange={onChange}
-      />
-      <label htmlFor="confirmPass">Confirm Password:</label>
-      <input
-        id="confirmPass"
-        name="confirmPass"
-        type="password"
-        required
-        onChange={onChange}
-      />
+    <>
+      <form onSubmit={handleSubmit}>
+        <div>{error && <p>{error.error}</p>}</div>
+        <input
+          aria-label="username"
+          placeholder="username"
+          id="regUsername"
+          name="regUsername"
+          required
+          type="text"
+          onChange={onChange}
+        ></input>
+        <input
+          aria-label="password"
+          placeholder="password"
+          id="regPassword"
+          name="regPassword"
+          type="password"
+          required
+          onChange={onChange}
+        />
+        <input
+          aria-label="confirm password"
+          placeholder="confirm password"
+          id="confirmPass"
+          name="confirmPass"
+          type="password"
+          required
+          onChange={onChange}
+        />
+      </form>
       <button type="submit"> Register </button>
-    </form>
+    </>
   );
 };
 

@@ -13,6 +13,7 @@ import LandingPage from "./routes/LandingPage/LandingPage";
 import Registration from "./routes/Registration/Registration";
 import Login from "./routes/LogIn/Login";
 import Dashboard from "./routes/Dashboard/Dashboard"
+import Tips from "./routes/Tips/Tips"
 
 const App = () => {
   const [userId, setUserId] = useState(null);
@@ -61,6 +62,11 @@ const App = () => {
             exact
             path="/dashboard"
             component={(props) => <Dashboard {...props} username={username} userId={userId} setUserId={setUserId}/>}    
+            />
+            <PrivateRoute 
+            exact
+            path="/tips"
+            component={(props) => <Tips {...props} username={username} userId={userId} setUserId={setUserId}/>}    
             />
           </Switch>
         </Router>

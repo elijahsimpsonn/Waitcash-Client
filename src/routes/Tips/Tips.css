@@ -1,0 +1,38 @@
+.tips {
+    text-align: center;
+}
+
+.tips h3 {
+    margin-top: 20px;
+}
+
+.tip-box {
+    border: 1px solid white;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tip-box button {
+    margin-bottom: 17px;
+}
+
+.earnings {
+    border: 1px solid white;
+    width: 95%;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.earnings hr {
+    width: 60%;
+}
+
+.endshift {
+    margin-top: 50px;
+}
+
+input {
+    width: 170px;
+}

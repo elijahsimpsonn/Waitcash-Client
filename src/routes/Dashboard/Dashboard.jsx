@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import WeekUtils from 'week-utils'
 import TokenService from '../../services/tokenService'
 import appApiService from '../../services/appApiService'
+import { Link } from 'react-router-dom';
 import './Dashboard.css'
 
 export default function Dashboard(props) {
@@ -68,10 +69,6 @@ export default function Dashboard(props) {
         props.setUserId(null)
     }
 
-    const handleStartShift = () => {
-
-    }
-
     // --------------- //
 
     // CONSOLE LOG TEST (DELETE BEFORE PRODUCTION BUILD) //
@@ -87,7 +84,7 @@ export default function Dashboard(props) {
         {/* <h3>{props.username}</h3> username comes back as undefined for some reason? */}
 
         <div className="button-section">
-        <button className="space">Start Shift</button>
+        <Link to='/tips'><button className="space">Start Shift</button></Link>
         <button onClick={handleLogout}>Log Out</button>
         </div>
 
