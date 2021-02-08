@@ -12,6 +12,11 @@
     margin-left: 16px;
 }
 
+.graphs {
+    text-align: center;
+    margin-top: 20px;
+}
+
 button {
     padding: 8px 35px;
     margin-bottom: 8px;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import WeekUtils from 'week-utils'
 import TokenService from '../../services/tokenService'
 import appApiService from '../../services/appApiService'
 import './Dashboard.css'
@@ -7,6 +8,7 @@ export default function Dashboard(props) {
 
     const [tips, setTips] = useState([]);
     const currentDate = new Date();
+    const weekUtils = new WeekUtils(0, 6);
 
     useEffect(() => {
         appApiService.getAllTips().then((tips) => {
@@ -22,13 +24,43 @@ export default function Dashboard(props) {
         } return sum;
     }
 
-    const sumOfYearlyEarnings = null //Get tip_totals fron tips state matching the current year from currentDate, then sum and return?
-
-    const sumOfMonthyEarning = null //Get tip_totals fron tips state matching the current month from currentDate, then sum and return?
-
-    const sumOfWeeklyEarnings = null //Get tip_totals fron tips state matching the current week from currentDate, then sum and return?
+    const sumOfYearlyEarnings = (tips) => {
+        let currentYear = currentDate.getFullYear()
+        let sum = 0
+        for(let i = 0; i < tips.length; i++) {
+            let tipDate = new Date(tips[i].tip_date);
+            if(tipDate.getFullYear() === currentYear) {
+                let curr = parseFloat(tips[i].tip_total);
+                sum = sum + curr;
+            }
+        } return sum
+    }
     
-
+    const sumOfMonthyEarnings = (tips) => {
+        let currentMonth = currentDate.getMonth()
+        let sum = 0
+        for(let i = 0; i < tips.length; i++) {
+            let tipDate = new Date(tips[i].tip_date);
+            if(tipDate.getMonth() === currentMonth) {
+                let curr = parseFloat(tips[i].tip_total);
+                sum = sum + curr;
+            }
+        } return sum
+    }
+    
+    const sumOfWeeklyEarnings = (tips) => {
+        let currentWeek = weekUtils.curWeek(currentDate)
+        let sum = 0
+        for(let i = 0; i < tips.length; i++) {
+            let tipDate = new Date(tips[i].tip_date);
+            let tipWeek = weekUtils.curWeek(tipDate)
+            if(tipWeek === currentWeek) {
+                let curr = parseFloat(tips[i].tip_total);
+                sum = sum + curr;
+            }
+        } return sum
+    }
+    
     // BUTTON FUNCTIONS //
 
     const handleLogout = () => {
@@ -44,7 +76,9 @@ export default function Dashboard(props) {
 
     // CONSOLE LOG TEST (DELETE BEFORE PRODUCTION BUILD) //
     console.log(tips)
-    console.log(currentDate)
+    // console.log(currentDate)
+    // console.log(tipDate)
+    // console.log(currentYear)
     // ------------------------------------------------ //
 
     return (
@@ -61,19 +95,21 @@ export default function Dashboard(props) {
 
         <div className="earnings">
         <span>Total Earnings (All Time): ${sumOfTotalEarnings(tips)}</span>
-        <p>Current Yearly Earnings: </p>
-        <p>Current Monthly Earnings: </p>
-        <p>Current Weekly Earnings: </p>
+        <p>Current Yearly Earnings: ${sumOfYearlyEarnings(tips)}</p>
+        <p>Current Monthly Earnings: ${sumOfMonthyEarnings(tips)}</p>
+        <p>Current Weekly Earnings: ${sumOfWeeklyEarnings(tips)}</p>
         </div>
 
         <hr/>
 
+        <div className="graphs">
         <select name="graphs" id="graphs">
             <option value="year">All Year Totals</option>
             <option value="month">Highest Earning Months</option>
             <option value="dates">Highest Earning Dates</option>
             <option value="days">Hightest Earning Days</option>
         </select>
+        </div>
         </>
         
     )
