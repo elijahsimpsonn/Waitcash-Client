@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import WeekUtils from 'week-utils'
+import { Link } from 'react-router-dom';
+import { VictoryPie } from 'victory'
+
 import TokenService from '../../services/tokenService'
 import appApiService from '../../services/appApiService'
-import { Link } from 'react-router-dom';
-import { VictoryBar } from 'victory'
+
 import './Dashboard.css'
 
 export default function Dashboard(props) {
 
+    // GLOBAL STATE & VARIABLES //
+
     const [tips, setTips] = useState([]);
     const currentDate = new Date();
     const weekUtils = new WeekUtils(0, 6);
+
+    // SERVER CALLS //
 
     useEffect(() => {
         appApiService.getAllTips().then((tips) => {
             setTips(tips)
         })
     }, [])
+
+    // FUNCTIONS FOR EARNINGS DIV //
 
     const sumOfTotalEarnings = (tips) => {
         let sum = 0
@@ -62,6 +70,50 @@ export default function Dashboard(props) {
             }
         } return sum
     }
+
+    // FUNCTIONS FOR GRAPH DATA //
+
+    const getMonthData = (tips) => {
+        //Add each tip to the same month in the months object
+        //Return the months object
+        let currentYear = currentDate.getFullYear()
+        let months = {
+            "January": 0,
+            "February": 0,
+            "March": 0,
+            "April": 0,
+            "May": 0,
+            "June": 0,
+            "July": 0,
+            "August": 0,
+            "September": 0,
+            "October": 0,
+            "November": 0,
+            "December": 0,
+        }
+        for(let i = 0; i < tips.length; i++) {
+            let tipDate = new Date(tips[i].tip_date)
+            let tipMonth = tipDate.toLocaleString('default', { month: 'long' })
+            if (tipDate.getFullYear() === currentYear) {
+                months[tipMonth] += parseFloat(tips[i].tip_total)
+            }
+        }
+        return months
+    }
+
+    const getDateData = (tips) => {
+
+    }
+
+    const getDayData = (tips) => {
+
+    }
+
+    // DATA SETS FOR GRAPHS //
+
+    const monthData = getMonthData(tips)
+    const dateData = getDateData(tips)
+    const dayData = getDayData(tips)
     
     // BUTTON FUNCTIONS //
 
@@ -70,19 +122,17 @@ export default function Dashboard(props) {
         props.setUserId(null)
     }
 
-    // --------------- //
-
     // CONSOLE LOG TEST (DELETE BEFORE PRODUCTION BUILD) //
     console.log(tips)
     // console.log(currentDate)
     // console.log(tipDate)
     // console.log(currentYear)
-    // ------------------------------------------------ //
+    // console.log(currentDate.toLocaleString('default', { month: 'long' }))
+    console.log(monthData)
 
     return (
         <>
         <h3 className="date">{currentDate.toLocaleDateString()}</h3>
-        {/* <h3>{props.username}</h3> username comes back as undefined for some reason? */}
 
         <div className="button-section">
         <Link to='/tips'><button className="space">Enter Tips</button></Link>
@@ -109,7 +159,20 @@ export default function Dashboard(props) {
         </select>
         </div>
 
-        <VictoryBar/>
+
+        {/* All Year Totals Chart */}
+
+        {/* Highest Earning Months Chart */}
+
+        {/* Highest Earning Dates Chart */}
+
+        {/* Highest Earning Days Of The Week Chart */}
+
+        <VictoryPie
+        data={monthData}
+        x="tip_total"
+        y=""
+        />
         </>
         
     )

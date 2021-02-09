@@ -76,7 +76,7 @@ const RegistrationForm = (props) => {
           onChange={onChange}
         />
       </form>
-      <button type="submit"> Register </button>
+      <button type="submit" onClick={handleSubmit}> Register </button>
     </>
   );
 };

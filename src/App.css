@@ -1,9 +1,13 @@
+* a {
+  color: #cad2c5;
+}
+
 body {
-    background-color: #2f3e46;
-    color: #CAD2C5;
-    font-family: 'Ubuntu', sans-serif;
+  background-color: #2f3e46;
+  font-family: "Ubuntu", sans-serif;
+  color: #cad2c5;
 }
 
 * h1 {
-    font-family: 'Permanent Marker', cursive;
+  font-family: "Permanent Marker", cursive;
 }
