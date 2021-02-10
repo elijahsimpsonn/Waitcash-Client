@@ -6,14 +6,6 @@ CLIENT TODO -
     REGISTRATION 
         Missing user_name in body? Need to fix the registration process
 
-    DASHBAORD
-        Implement Charts
-        Hook Charts up to filer list
-
-    TIPS
-        Page has to be refreshed to show updates to state, needs to be fixed
-        Clear input after submit
-
     APP
         Fix Desktop styles, make final style choices
         Add Cypress testing 

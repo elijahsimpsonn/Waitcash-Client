@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import WeekUtils from "week-utils";
 import { Link } from "react-router-dom";
-import { VictoryPie } from "victory";
+import { VictoryLabel, VictoryPie } from "victory";
+import FadeIn from 'react-fade-in';
 
 import TokenService from "../../services/tokenService";
 import appApiService from "../../services/appApiService";
@@ -13,6 +14,7 @@ export default function Dashboard(props) {
 
   const [tips, setTips] = useState([]);
   const currentDate = new Date();
+  // weekUtils is a package that makes it easy to work with weeks inside dates. Read more here: https://www.npmjs.com/package/week-utils
   const weekUtils = new WeekUtils(0, 6);
 
   // SERVER CALLS //
@@ -31,7 +33,7 @@ export default function Dashboard(props) {
       let curr = parseFloat(tips[i].tip_total);
       sum = sum + curr;
     }
-    return sum;
+    return sum.toFixed(2);
   };
 
   const sumOfYearlyEarnings = (tips) => {
@@ -44,7 +46,7 @@ export default function Dashboard(props) {
         sum = sum + curr;
       }
     }
-    return sum;
+    return sum.toFixed(2);
   };
 
   const sumOfMonthyEarnings = (tips) => {
@@ -57,7 +59,7 @@ export default function Dashboard(props) {
         sum = sum + curr;
       }
     }
-    return sum;
+    return sum.toFixed(2);
   };
 
   const sumOfWeeklyEarnings = (tips) => {
@@ -71,14 +73,12 @@ export default function Dashboard(props) {
         sum = sum + curr;
       }
     }
-    return sum;
+    return sum.toFixed(2);
   };
 
   // FUNCTIONS FOR GRAPH DATA //
 
   const getMonthData = (tips) => {
-    //Add each tip to the same month in the months object
-    //Return the months object
     let currentYear = currentDate.getFullYear();
     let months = [
       { month: "January", sum: 0 },
@@ -108,20 +108,19 @@ export default function Dashboard(props) {
     return months;
   };
 
-  const arrangeMonthDate = () => {
-      const data = getMonthData(tips)
-      
-  }
-
-  const getDateData = (tips) => {};
-
-  const getDayData = (tips) => {};
+  const arrangeMonthData = () => {
+    const data = getMonthData(tips);
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].sum <= 0) {
+        delete data[i];
+      }
+    }
+    return data;
+  };
 
   // DATA SETS FOR GRAPHS //
 
-  const monthData = getMonthData(tips);
-  const dateData = getDateData(tips);
-  const dayData = getDayData(tips);
+  const monthData = arrangeMonthData();
 
   // BUTTON FUNCTIONS //
 
@@ -130,16 +129,10 @@ export default function Dashboard(props) {
     props.setUserId(null);
   };
 
-  // CONSOLE LOG TEST (DELETE BEFORE PRODUCTION BUILD) //
-  console.log(tips);
-  // console.log(currentDate)
-  // console.log(tipDate)
-  // console.log(currentYear)
-  // console.log(currentDate.toLocaleString('default', { month: 'long' }))
-  console.log(monthData);
+  // RETURN //
 
   return (
-    <>
+    <div>
       <h3 className="date">{currentDate.toLocaleDateString()}</h3>
 
       <div className="button-section">
@@ -151,37 +144,45 @@ export default function Dashboard(props) {
 
       <hr />
 
+<FadeIn delay="400">
       <div className="earnings">
         <span>Total Earnings (All Time): ${sumOfTotalEarnings(tips)}</span>
         <p>Current Yearly Earnings: ${sumOfYearlyEarnings(tips)}</p>
         <p>Current Monthly Earnings: ${sumOfMonthyEarnings(tips)}</p>
         <p>Current Weekly Earnings: ${sumOfWeeklyEarnings(tips)}</p>
       </div>
+      </FadeIn>
 
       <hr />
+      <h4>Earnings Chart</h4>
 
-      <div className="graphs">
-        <select name="graphs" id="graphs">
-          <option value="year">All Year Totals</option>
-          <option value="month">Highest Earning Months</option>
-          <option value="dates">Highest Earning Dates</option>
-          <option value="days">Hightest Earning Days</option>
-        </select>
+<FadeIn delay="800">
+      <div className="month-pie-chart">
+        <VictoryPie
+          data={monthData}
+          x="month"
+          y="sum"
+          colorScale={[
+            "#ccd4bf",
+            "#e7cba9",
+            "#eebab2",
+            "#f5f3e7",
+            "#f5e2e4",
+            "#f5bfd2",
+            "#a1cdce",
+            "#e5db9c",
+            "#beb4c5",
+            "#e6a57e",
+            "#98d4bb",
+            "#c6c9d0",
+          ]}
+          labelPlacement="perpendicular"
+          labelComponent={<VictoryLabel style={[{ fill: "#cad2c5" }]} />}
+        />
       </div>
-
-      {/* All Year Totals Chart */}
-
-      {/* Highest Earning Months Chart */}
-
-      {/* Highest Earning Dates Chart */}
-
-      {/* Highest Earning Days Of The Week Chart */}
-
-      <VictoryPie 
-      colorScale={["auqamarine", "blueviolet", "blue", "burlywood", "chocolate", "chartreuse", "darkolivegreen", "darkslategrey", "floralwhite", "indianred", "lemonchiffon", "pink"]}
-      data={monthData} 
-      x="month" 
-      y="sum" />
-    </>
+      </FadeIn>
+    </div>
   );
 }
+
+// {<VictoryLabel style={[{ fill: "#cad2c5" }]}/>}

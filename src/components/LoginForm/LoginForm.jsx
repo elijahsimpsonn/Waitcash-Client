@@ -34,7 +34,7 @@ function LoginForm(props) {
             <form onSubmit={handleSubmitJwtAuth}>
                 {error && <div>{error.error}</div>}
                 <input required type="text" id='username' placeholder="username" aria-label="username" />
-                <input required type="text" id='password' placeholder="password" aria-label="password"/>
+                <input required type="password" id='password' placeholder="password" aria-label="password"/>
                 <br/>
                 <button type="submit"> Login </button>
             </form>

@@ -24,7 +24,7 @@ const RegistrationForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError(null);
-    const { regUsername, regPassword, confirmPass, email } = state;
+    const { regUsername, regPassword, confirmPass } = state;
 
     if (regPassword.length < 6) {
       setError("Password must be at least 6 characters");
@@ -35,9 +35,8 @@ const RegistrationForm = (props) => {
       return;
     }
     const newUser = {
-      username: regUsername,
-      password: regPassword,
-      email,
+      user_name: regUsername,
+      user_password: regPassword,
     };
     AuthApiService.postUser(newUser)
       .then((res) => props.onRegSuccess())

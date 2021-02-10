@@ -9,12 +9,20 @@
 }
 
 .earnings {
-    margin-left: 16px;
+    text-align: center;
+    margin-top: 12px;
 }
 
 .graphs {
     text-align: center;
     margin-top: 20px;
+}
+
+.month-pie-chart {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    
 }
 
 button {
@@ -24,4 +32,8 @@ button {
 
 hr {
     width: 90%;
+}
+
+h4 {
+    text-align: center;
 }

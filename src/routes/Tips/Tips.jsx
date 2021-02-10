@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
 import appApiService from "../../services/appApiService";
 import { Link } from "react-router-dom";
+import { useStateIfMounted } from "use-state-if-mounted"
 import "./Tips.css";
 
 export default function Tips(props) {
-  const [tips, setTips] = useState([]);
-  const [tipTotal, setTipTotal] = useState("");
+  const [tips, setTips] = useStateIfMounted([]);
+  const [tipTotal, setTipTotal] = useStateIfMounted("");
   const currentDate = new Date();
 
   useEffect(() => {
     appApiService.getAllTips().then((tips) => {
       setTips(tips);
     });
-  }, []);
+  }, [tips]);
 
+ 
   const handleSubmitTip = (e) => {
     e.preventDefault();
     if (tipTotal === "") {
       alert("Must enter a tip total");
     }
     appApiService.postTip(tipTotal);
+    setTips([...tips, tipTotal])
+    setTipTotal("")
   };
 
   const sumOfDailyTips = (tips) => {
@@ -32,7 +36,7 @@ export default function Tips(props) {
         sum = sum + curr;
       }
     }
-    return sum;
+    return sum.toFixed(2);
   };
 
   const avgTipTotal = (tips) => {
@@ -60,8 +64,6 @@ export default function Tips(props) {
     }
     return sum;
   };
-
-  console.log(tipTotal)
 
   return (
     <div className="tips">
