@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import appApiService from "../../services/appApiService";
 import { Link } from "react-router-dom";
-import { useStateIfMounted } from "use-state-if-mounted"
 import "./Tips.css";
 
 export default function Tips(props) {
-  const [tips, setTips] = useStateIfMounted([]);
-  const [tipTotal, setTipTotal] = useStateIfMounted("");
+  const [tips, setTips] = useState([]);
+  const [tipTotal, setTipTotal] = useState("");
+  const [refresh, setRefresh] = useState(false)
   const currentDate = new Date();
 
   useEffect(() => {
     appApiService.getAllTips().then((tips) => {
       setTips(tips);
     });
-  }, [tips]);
-
+  }, [refresh]);
  
   const handleSubmitTip = (e) => {
     e.preventDefault();
@@ -22,16 +21,15 @@ export default function Tips(props) {
       alert("Must enter a tip total");
     }
     appApiService.postTip(tipTotal);
-    setTips([...tips, tipTotal])
+    setRefresh(!refresh)
     setTipTotal("")
   };
 
   const sumOfDailyTips = (tips) => {
-    let currentDay = currentDate.getDate();
     let sum = 0;
-    for (let i = 0; i < tips.length; i++) {
-      let tipDay = new Date(tips[i].tip_date);
-      if (tipDay.getDate() === currentDay) {
+    for (let i = 0; i < tips.length; i++) {  
+      let tipDateInfo = new Date(tips[i].tip_date);        
+      if (tipDateInfo.toLocaleDateString() === currentDate.toLocaleDateString()) {
         let curr = parseFloat(tips[i].tip_total);
         sum = sum + curr;
       }
