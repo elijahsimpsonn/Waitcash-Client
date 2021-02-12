@@ -56,6 +56,7 @@ const RegistrationForm = (props) => {
           type="text"
           onChange={onChange}
         ></input>
+        <br/>
         <input
           aria-label="password"
           placeholder="password"
@@ -65,6 +66,7 @@ const RegistrationForm = (props) => {
           required
           onChange={onChange}
         />
+        <br/>
         <input
           aria-label="confirm password"
           placeholder="confirm password"

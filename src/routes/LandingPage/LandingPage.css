@@ -19,11 +19,12 @@
     margin-right: 30px;
 }
 
-footer {
-    position: fixed;     
-    text-align: center;    
+.footer {     
     bottom: 0px; 
     width: 100%;
+    text-align: center;
+    margin-top: 50px;
+
 }
 
 h3 {

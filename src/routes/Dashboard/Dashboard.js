@@ -132,56 +132,63 @@ export default function Dashboard(props) {
   // RETURN //
 
   return (
-    <div>
+    <>
+      {" "}
       <h3 className="date">{currentDate.toLocaleDateString()}</h3>
+      <div className="container">
+        <div className="item earnings-info">
+          <div className="button-section">
+            <Link to="/tips">
+              <button className="space">Enter Tips</button>
+            </Link>
+            <button onClick={handleLogout}>Log Out</button>
+          </div>
 
-      <div className="button-section">
-        <Link to="/tips">
-          <button className="space">Enter Tips</button>
-        </Link>
-        <button onClick={handleLogout}>Log Out</button>
+          <hr />
+
+          <FadeIn delay="500">
+            <div className="earnings">
+              <span>
+                Total Earnings (All Time): ${sumOfTotalEarnings(tips)}
+              </span>
+              <p>Current Yearly Earnings: ${sumOfYearlyEarnings(tips)}</p>
+              <p>Current Monthly Earnings: ${sumOfMonthyEarnings(tips)}</p>
+              <p>Current Weekly Earnings: ${sumOfWeeklyEarnings(tips)}</p>
+            </div>
+          </FadeIn>
+
+          <hr />
+        </div>
+
+        <div className="item chart">
+          <FadeIn delay="1000">
+            <div className="month-pie-chart">
+              <VictoryPie
+                data={monthData}
+                x="month"
+                y="sum"
+                colorScale={[
+                  "#ccd4bf",
+                  "#e7cba9",
+                  "#eebab2",
+                  "#f5f3e7",
+                  "#f5e2e4",
+                  "#f5bfd2",
+                  "#a1cdce",
+                  "#e5db9c",
+                  "#beb4c5",
+                  "#e6a57e",
+                  "#98d4bb",
+                  "#c6c9d0",
+                ]}
+                labelPlacement="perpendicular"
+                labelComponent={<VictoryLabel style={[{ fill: "#cad2c5" }]} />}
+              />
+            </div>
+          </FadeIn>
+        </div>
       </div>
-
-      <hr />
-
-      <FadeIn delay="500">
-        <div className="earnings">
-          <span>Total Earnings (All Time): ${sumOfTotalEarnings(tips)}</span>
-          <p>Current Yearly Earnings: ${sumOfYearlyEarnings(tips)}</p>
-          <p>Current Monthly Earnings: ${sumOfMonthyEarnings(tips)}</p>
-          <p>Current Weekly Earnings: ${sumOfWeeklyEarnings(tips)}</p>
-        </div>
-      </FadeIn>
-
-      <hr />
-      <h4>Earnings Chart</h4>
-
-      <FadeIn delay="1000">
-        <div className="month-pie-chart">
-          <VictoryPie
-            data={monthData}
-            x="month"
-            y="sum"
-            colorScale={[
-              "#ccd4bf",
-              "#e7cba9",
-              "#eebab2",
-              "#f5f3e7",
-              "#f5e2e4",
-              "#f5bfd2",
-              "#a1cdce",
-              "#e5db9c",
-              "#beb4c5",
-              "#e6a57e",
-              "#98d4bb",
-              "#c6c9d0",
-            ]}
-            labelPlacement="perpendicular"
-            labelComponent={<VictoryLabel style={[{ fill: "#cad2c5" }]} />}
-          />
-        </div>
-      </FadeIn>
-    </div>
+    </>
   );
 }
 

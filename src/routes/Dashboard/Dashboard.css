@@ -37,3 +37,13 @@ hr {
 h4 {
     text-align: center;
 }
+
+@media only screen and (min-width: 1080px) {
+   hr {
+       width: 50%
+   }
+
+   .month-pie-chart {
+       width: 30%;
+   }
+  }

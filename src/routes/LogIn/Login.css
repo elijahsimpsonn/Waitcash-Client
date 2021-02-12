@@ -5,3 +5,16 @@ h2 {
 .links {
     text-align: center;
 }
+
+form {
+    text-align: center;
+}
+
+input {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+button {
+    margin-top: 10px;
+}

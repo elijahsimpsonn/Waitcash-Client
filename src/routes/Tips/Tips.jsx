@@ -38,11 +38,10 @@ export default function Tips(props) {
   };
 
   const avgTipTotal = (tips) => {
-    let currentDay = currentDate.getDate();
     let arrOfTips = [0];
     for (let i = 0; i < tips.length; i++) {
-      let tipDay = new Date(tips[i].tip_date);
-      if (tipDay.getDate() === currentDay) {
+      let tipDateInfo = new Date(tips[i].tip_date);
+      if (tipDateInfo.toLocaleDateString() === currentDate.toLocaleDateString()) {
         let curr = parseFloat(tips[i].tip_total);
         arrOfTips.push(curr);
       }
@@ -52,11 +51,10 @@ export default function Tips(props) {
   };
 
   const mealCount = (tips) => {
-    let currentDay = currentDate.getDate();
     let sum = 0;
     for (let i = 0; i < tips.length; i++) {
-      let tipDay = new Date(tips[i].tip_date);
-      if (tipDay.getDate() === currentDay) {
+      let tipDateInfo = new Date(tips[i].tip_date);
+      if (tipDateInfo.toLocaleDateString() === currentDate.toLocaleDateString()) {
         sum = sum + 1;
       }
     }
