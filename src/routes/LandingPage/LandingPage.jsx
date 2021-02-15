@@ -41,12 +41,12 @@ function LandingPage(props) {
 
       <div className="text-section">
         <p>WaitCash is a Full-Stack Application.</p>
-        <p><a href="https://github.com/elijahsimpsonn/waitcashv2-server">Want to learn more about it's tech stack? Click me!</a></p>
+        <p><a href="https://github.com/elijahsimpsonn/waitcashv2-server">Want to learn more about it's tech stack? Click here!</a></p>
       </div>
 
       <div className="text-section">
         <p>
-          This application allows you to keep track of wages earned on wait
+          This application allows you to keep track of wages earned during
           shifts.
         </p>
       </div>
