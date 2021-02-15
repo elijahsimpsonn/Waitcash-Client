@@ -15,12 +15,12 @@ export default function Tips(props) {
     });
   }, [refresh]);
  
-  const handleSubmitTip = (e) => {
+  const handleSubmitTip = async (e) => {
     e.preventDefault();
     if (tipTotal === "") {
       alert("Must enter a tip total");
     }
-    appApiService.postTip(tipTotal);
+    await appApiService.postTip(tipTotal);
     setRefresh(!refresh)
     setTipTotal("")
   };
