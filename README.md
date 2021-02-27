@@ -57,3 +57,14 @@ Below you will find information about the application, including the packages us
 
 ### ChangeLog / Future Updates:
 Coming soon!
+
+---
+
+### Setup Documentation:
+* First follow the setup documentaion in the <a href="https://github.com/elijahsimpsonn/waitcashv2-server">server repo</a>.
+* Clone this repo.
+* Run `npm install` to install all of the dependencies.
+* In the `config.js` file in the `src` folder, change the `API_ENDPOINT` to `http://localhost:8000/api`.
+* Run `npm start` in the terminal, and everything should be up an running.
+
+##### Please reach out to me if this does not work for you for whatever reason, and I will do my best to help you resolve any issues. 
