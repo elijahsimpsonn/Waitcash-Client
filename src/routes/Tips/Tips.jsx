@@ -20,12 +20,14 @@ export default function Tips(props) {
     if (tipTotal === "") {
       alert("Must enter a tip total");
     }
-    if (tipTotal > 150) {
+    else if (tipTotal > 150) {
       alert("Max tip per entry is $150")
     }
+    else {
     await appApiService.postTip(tipTotal);
     setRefresh(!refresh)
     setTipTotal("")
+    }
   };
 
   const sumOfDailyTips = (tips) => {
